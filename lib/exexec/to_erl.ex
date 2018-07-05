@@ -21,7 +21,7 @@ defmodule Exexec.ToErl do
     if value, do: boolean_option
   end
 
-  @string_options [:executable, :cd, :kill_command, :group, :user]
+  @string_options [:executable, :cd, :kill_command, :user]
   def command_option_to_erl(string_option, value)
   when string_option in @string_options do
     string_option =
@@ -30,7 +30,7 @@ defmodule Exexec.ToErl do
     {string_option, to_char_list(value)}
   end
 
-  @integer_options [:kill_timeout, :success_exit_code, :nice]
+  @integer_options [:kill_timeout, :success_exit_code, :group, :nice]
   def command_option_to_erl(integer_option, value)
   when integer_option in @integer_options do
     {integer_option, value}
