@@ -143,7 +143,6 @@ defmodule ExexecTest do
 
   test "which_children" do
     {:ok, _sleep_pid, sleep_os_pid} = run_link("sleep 10")
-
-    assert which_children == [sleep_os_pid]
+    assert Exexec.which_children == [sleep_os_pid]
   end
 end
