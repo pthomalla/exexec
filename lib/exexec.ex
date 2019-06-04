@@ -87,8 +87,8 @@ defmodule Exexec do
 
   `os_pid` can also be a port.
   """
-  @spec manage(os_pid | port) :: {:ok, pid, os_pid} | {:error, any}
-  @spec manage(os_pid | port, command_options) :: {:ok, pid, os_pid} | {:error, any}
+  @spec manage(os_pid | port) :: {:ok, pid, os_pid} | {:error, :not_found | Keyword.t()}
+  @spec manage(os_pid | port, command_options) :: {:ok, pid, os_pid} | {:error, :not_found | nonempty_list()}
   def manage(os_pid, options \\ []),
     do: :exec.manage(os_pid, command_options_to_erl(options))
 
@@ -212,7 +212,7 @@ defmodule Exexec do
   See `Exexec.stop/1`.
   """
   @spec stop_and_wait(pid | os_pid | port) :: :ok | {:error, any}
-  @spec stop_and_wait(pid | os_pid | port, integer) :: :ok | {:error, any}
+  @spec stop_and_wait(pid | os_pid | port, integer) :: term() | {:error, any()}
   def stop_and_wait(pid, timeout \\ 5_000), do: :exec.stop_and_wait(pid, timeout)
 
   @doc """
